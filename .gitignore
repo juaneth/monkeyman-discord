@@ -89,4 +89,4 @@ typings/
 out/
 
 #Dont leak token
-config.*
+/src/bot/config/**
