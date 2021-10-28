@@ -91,3 +91,4 @@ typings/
 # Electron-Forge
 out/
 src/bot/config/config.json
+src/bot/config/config.json
