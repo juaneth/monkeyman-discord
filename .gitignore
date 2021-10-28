@@ -1,6 +1,3 @@
-# Dont leak token
-src/bot/config/config.json
-
 # Logs
 logs
 *.log
@@ -90,3 +87,7 @@ typings/
 
 # Electron-Forge
 out/
+
+# Dont leak token
+
+src/bot/config/config.json
