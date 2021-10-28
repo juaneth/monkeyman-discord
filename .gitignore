@@ -1,5 +1,5 @@
-#Dont leak token
-*.json
+# Dont leak token
+config.json
 
 # Logs
 logs
