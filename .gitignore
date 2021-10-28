@@ -1,5 +1,5 @@
 # Dont leak token
-config.json
+src/bot/config/config.json
 
 # Logs
 logs
