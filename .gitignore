@@ -90,3 +90,4 @@ out/
 
 # Dont leak token
 src/bot/config/config.json
+src/bot/config/config.json
