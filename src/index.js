@@ -14,6 +14,7 @@ const createWindow = () => {
         title: "Monkeyman Discord Bot Dashboard",
         webPreferences: {
             nodeIntegration: true,
+            contextIsolation: false,
         }
     });
 
