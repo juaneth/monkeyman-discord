@@ -1,10 +1,10 @@
 const Discord = require('discord.js')
 
 module.exports = {
-    name: "ping",
+    name: 'ping',
     description: "Sends the bots ping",
     execute(message) {
-        message.channel.send('Loading data').then(async (msg) => {
+        message.channel.send('Loading data').then(async(msg) => {
             msg.delete()
             const Pingembed = new Discord.MessageEmbed()
                 .setColor("#964B00")

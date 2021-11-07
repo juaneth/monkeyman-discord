@@ -11,12 +11,76 @@
 
 <body style="text-align: center;">
     <h1 class="title">💖 Monkeyman Discord Bot 💖</h1>
-    <p class="subtitle">Welcome, just insert your token below which can be generated at <a href="https://discord.com/developers/applications">Discord's Developer Portal</a> below</p>
+    <p class="subtitle">Welcome, just insert your token and prefix below, your token can be generated at <a id="discord-dev-portal">Discord's Developer Portal</a> below</p>
 
     <div style="text-align: center;">
-        <input style="margin-bottom: 20px;" class="input" type="text" placeholder="Input token here"></input>
+        <input style="margin-bottom: 20px;" class="input" id="tokeninput" type="text" placeholder="Input token here (It will be a long string of characters)"></input>
+        <input style="margin-bottom: 20px;" class="input" id="prefixinput" type="text" placeholder="Input prefix here (eg. monkeyman.)"></input>
         <button class="button" id="startbot">Start Bot</button>
     </div>
+
+    <script>
+        document.getElementById("startbot").onclick = function() {
+            var starttime = Date.now();
+            console.log("Bot starting");
+
+            var path = require('path');
+
+            const token = document.getElementById('tokeninput').value;
+            const prefix = document.getElementById('prefixinput').value;
+
+            const Discord = require('discord.js');
+            const client = new Discord.Client();
+
+            //enter token + prefix code
+            const fs = require('fs'); //npm i fs
+
+            client.commands = new Discord.Collection();
+
+            const ping = require(process.cwd() + '/src/cmds/ping.js');
+            client.commands.set(ping.name, ping);
+            const dad = require(process.cwd() + '/src/cmds/dad.js');
+            client.commands.set(dad.name, dad);
+
+            client.on("ready", () => {
+                console.log(`Logged in as ${client.user.tag}!`);
+                client.user.setActivity(`${prefix}help`, {
+                        type: 'WATCHING'
+                    }) // STREAMING, WATCHING, CUSTOM_STATUS, PLAYING, COMPETING
+            });
+
+            client.on('message', message => {
+                if (!message.content.startsWith(prefix) || message.author.bot) return;
+                const args = message.content.slice(prefix.length).split(/ +/);
+                const command = args.shift().toLowerCase();
+                //Help Commands
+                if (command === 'ping') {
+                    client.commands.get('ping').execute(message, args, Discord);
+                }
+                if (command === 'dad') {
+                    client.commands.get('dad').execute(message, args, Discord);
+                }
+            });
+
+            if (token == '') {
+                console.log('Enter a token');
+            } else {
+                try {
+                    client.login(token);
+                } catch {
+                    console.log('');
+                }
+            }
+        }
+        var totalstartup = starttime - Date.now();
+        totalstartup = totalstartup.toString().substring(1);
+        console.log(`Bot finished startup in ${totalstartup}ms`);
+
+        document.getElementById("discord-dev-portal").onclick = function() {
+            console.log('Opening Discord Devloper Portal');
+            require("openurl").open("https://discord.com/developers/applications");
+        }
+    </script>
 </body>
 
 </html>
